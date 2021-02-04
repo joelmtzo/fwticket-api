@@ -20,6 +20,6 @@ public class OrderDetailId implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "event_tickets_id", referencedColumnName = "id")
-	private EventTicket eventTicketId;
+	private EventTicket eventTicketsId;
 	
 }

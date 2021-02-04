@@ -11,5 +11,6 @@ public interface EventTicketsProjection {
 	TicketType 	getTicketTypeId();
 	double 		getPrice();
 	int 		getStock();
+	int			getId();
 	
 }
