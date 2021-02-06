@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.config.Projection;
 import com.fwtec.fwticket.entity.Customer;
 import com.fwtec.fwticket.entity.Order;
 
-@Projection(name = "inlineData2", types = Order.class)
+@Projection(name = "inlineData", types = Order.class)
 public interface OrderProjection {
 
 	int			getId();
