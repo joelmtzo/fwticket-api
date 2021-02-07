@@ -18,11 +18,6 @@ public class BeanProvider {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(12);
 	}
-	
-//	@Bean
-//	public AuthenticationSuccessHandler successHandler() {
-//		return new CustomLoginSuccessHandler("/perfil");
-//	}
 
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {

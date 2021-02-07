@@ -6,4 +6,6 @@ import com.fwtec.fwticket.entity.User;
 
 public interface UserJpaRepository extends JpaRepository<User, Integer> {
 
+	User findByUsername(String username);
+
 }
