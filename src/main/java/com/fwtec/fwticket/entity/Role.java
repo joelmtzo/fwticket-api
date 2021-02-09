@@ -1,20 +1,16 @@
 package com.fwtec.fwticket.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
 
 @Data
-@Table
 @Entity
+@Table(name = "roles")
 public class Role {
 
 	@Id
@@ -26,8 +22,5 @@ public class Role {
 
 	@Column
 	private String description;
-
-	@ManyToMany(mappedBy = "roles")
-	private Set<User> usuarios = new HashSet<>();
 	
 }

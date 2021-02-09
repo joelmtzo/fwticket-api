@@ -17,30 +17,34 @@ import com.fwtec.fwticket.security.JwtAuthorizationFilter;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
+	BeanProvider beanProvider;
 	UserDetailsService userDetailsService;
 	
 	@Autowired
-	BeanProvider beanProvider;
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
-		http
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-		.cors().and().csrf().disable()
-		.authorizeRequests()
-			.antMatchers("/events").permitAll()
-			.antMatchers(HttpMethod.POST, "/login").permitAll()
-			.anyRequest().authenticated()
-		.and()
-			.addFilter(new JwtAuthenticationFilter(authenticationManager()))
-			.addFilter(new JwtAuthorizationFilter(authenticationManager()));
+	public WebSecurityConfig(UserDetailsService userDetailsService, BeanProvider beanProvider) {
+		this.beanProvider = beanProvider;
+		this.userDetailsService = userDetailsService;
 	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(beanProvider.passwordEncoder());
+	}
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		
+		http
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and()
+			.cors().and().csrf().disable()
+		.authorizeRequests()
+			.antMatchers(HttpMethod.GET, "/**").permitAll()
+			.antMatchers(HttpMethod.POST, "/login").permitAll()
+			.anyRequest().authenticated()
+		.and()
+			.addFilter(new JwtAuthenticationFilter(authenticationManager()))
+			.addFilter(new JwtAuthorizationFilter(authenticationManager()));
 	}
 	
 }
